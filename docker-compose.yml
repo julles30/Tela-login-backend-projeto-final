@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  marcal_project_database:
+    env_file:
+      - .env
+    image: postgres:alpine
+    ports:
+      - "${POSTGRES_PORTS}"
+    container_name: "marcal_project_database"
+    restart: always
+    volumes: 
+      - ./marcal_project_database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+
+volumes: 
+  marcal_project_database:
