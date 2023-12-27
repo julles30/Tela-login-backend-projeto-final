@@ -6,6 +6,7 @@ class ContactModel {
     const data = await conn.query('SELECT * FROM contacts');
     return data.rows;
   }
+  
   async save(nome, telefone) {
     const conn = await client.conectar();
     const sql = 'INSERT INTO contacts(nome, telefone) VALUES ($1,$2);';

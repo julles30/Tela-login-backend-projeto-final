@@ -41,7 +41,7 @@ A tabela `Users` armazena informações sobre os usuários. Ela tem as seguintes
 
 Você pode criar a tabela `Users` com o seguinte código SQL:
 
-```
+``` sql
 CREATE TABLE Users (
     ID INT PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
@@ -64,7 +64,7 @@ A tabela Movies armazena informações sobre os filmes. Ela tem as seguintes col
  - MediumRating: A avaliação média do filme.
  - Você pode criar a tabela Movies com o seguinte código SQL:
 
-```
+``` sql
 CREATE TABLE Movies (
     ID INT PRIMARY KEY,
     Title VARCHAR(100) NOT NULL,
@@ -90,7 +90,7 @@ A chave primária da tabela Evaluate é uma combinação de UserID e MovieID, o 
 
 Você pode criar a tabela Evaluate com o seguinte código SQL:
 
-```
+``` sql
 CREATE TABLE Evaluate (
     UserID INT NOT NULL,
     MovieID INT NOT NULL,

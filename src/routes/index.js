@@ -8,7 +8,6 @@ const authController = require('../controllers/auth.controller');
 
 routes.post("/auth", authController.login);
 
-// routes.use(auth);
 routes.post("/user", userController.store);
 routes.get("/user", auth, userController.index);
 
