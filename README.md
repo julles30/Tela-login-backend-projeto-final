@@ -43,7 +43,7 @@ Você pode criar a tabela `Users` com o seguinte código SQL:
 
 ``` sql
 CREATE TABLE Users (
-    ID INT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
     Username VARCHAR(50) UNIQUE NOT NULL,
     Password VARCHAR(50) NOT NULL
@@ -66,7 +66,7 @@ A tabela Movies armazena informações sobre os filmes. Ela tem as seguintes col
 
 ``` sql
 CREATE TABLE Movies (
-    ID INT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Title VARCHAR(100) NOT NULL,
     Director VARCHAR(100),
     ReleaseDate DATE,
