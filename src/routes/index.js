@@ -3,23 +3,31 @@ const auth = require('../middlewares/auth.middleware');
 const routes = new Router();
 
 const userController = require('../controllers/user.controller');
-const contactController = require('../controllers/contact.controller');
+const movieController = require('../controllers/movie.controller');
+const evaluateController = require('../controllers/evaluate.controller')
 const authController = require('../controllers/auth.controller');
 
 routes.post("/auth", authController.login);
 
+// Rotas de usuário
 routes.post("/user", userController.store);
 routes.get("/user", auth, userController.index);
-
 routes.get("/user/:id", auth, userController.show);
 routes.put("/user/:id", auth, userController.update);
 routes.delete("/user/:id", auth, userController.destroy);
 
-routes.get("/contacts", auth, contactController.index);
-routes.post("/contacts", auth, contactController.store);
+// Rotas do filme
+routes.get("/movie", movieController.index);
+routes.post("/movie", auth, movieController.store);
+routes.get("/movie/:id", auth, movieController.show);
+routes.put("/movie/:id", auth, movieController.update);
+routes.delete("/movie/:id", auth, movieController.destroy)
 
-routes.get("/contacts/:id", auth, contactController.show);
-routes.put("/contacts/:id", auth, contactController.update);
-routes.delete("/contacts/:id", auth, contactController.destroy);
+// Rotas de avaliação
+routes.get("/evaluate", evaluateController.index);
+routes.post("/evaluate", auth, evaluateController.store);
+routes.get("/evaluate/:id", auth, evaluateController.show);
+routes.put("/evaluate/:id", auth, evaluateController.update);
+routes.delete("/evaluate/:id", auth, evaluateController.destroy);
 
 module.exports = routes;
