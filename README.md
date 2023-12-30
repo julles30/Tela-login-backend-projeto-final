@@ -4,7 +4,7 @@ O backend deste projeto serve como uma API para gerenciamento de filmes, usuári
 ## Tecnologias Utilizadas
 
 ### Node.js: Ambiente de execução JavaScript para o servidor.
-### Express: Framework para construção de APIs RESTful.
+### Express: Framework para construção de API.
 ### PostgreSQL: Banco de dados relacional para armazenamento dos dados.
 ### pg: Cliente PostgreSQL para Node.js.
 
@@ -91,13 +91,14 @@ A chave primária da tabela Evaluate é uma combinação de UserID e MovieID, o 
 Você pode criar a tabela Evaluate com o seguinte código SQL:
 
 ``` sql
-CREATE TABLE Evaluate (
-    UserID INT NOT NULL,
-    MovieID INT NOT NULL,
-    Rating INT CHECK (Rating >= 1 AND Rating <= 5) NOT NULL,
-    EvaluationDate DATE NOT NULL,
-    PRIMARY KEY(UserID, MovieID),
-    FOREIGN KEY(UserID) REFERENCES Users(ID),
-    FOREIGN KEY(MovieID) REFERENCES Movies(ID)
+CREATE TABLE evaluate (
+	userid int4 NOT NULL,
+	movieid int4 NOT NULL,
+	rating int4 NOT NULL,
+	evaluationdate date NOT NULL,
+	CONSTRAINT evaluate_pkey PRIMARY KEY (userid, movieid),
+	CONSTRAINT evaluate_rating_check CHECK (((rating >= 1) AND (rating <= 5))),
+	CONSTRAINT evaluate_movieid_fkey FOREIGN KEY (movieid) REFERENCES movies(id),
+	CONSTRAINT evaluate_userid_fkey FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE
 );
 ```
