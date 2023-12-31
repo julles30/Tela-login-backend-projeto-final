@@ -1,39 +1,56 @@
-const client = require('../database');
+const pool = require('../database');
 
 class EvaluateModel {
     async index() {
-        const conn = await client.conectar();
-        const data = await conn.query('SELECT * FROM Evaluate');
-        return data.rows
-
-    }
-
-    async save(evaluation) {
-        const conn = await client.conectar();
-        const sql = 'INSERT INTO Evaluate(UserID, MovieID, Rating, EvaluationDate) VALUES ($1,$2,$3,$4);';
-        const values = [evaluation.UserID, evaluation.MovieID, evaluation.Rating, evaluation.EvaluationDate];
-        return await conn.query(sql, values);
-    }
-
-    async find(id) {
-        const conn = await client.conectar();
-        const sql = 'SELECT * FROM Evaluate WHERE id=$1;';
-        const values = [id];
-        const data = await conn.query(sql, values);
+        const client = await pool.connect();
+        const data = await client.query('SELECT * FROM Evaluate');
+        client.release();
         return data.rows;
     }
 
-    async update(id, evaluation) {
-        const conn = await client.conectar();
-        const sql = 'UPDATE Evaluate SET UserID=$1, MovieID=$2, Rating=$3, EvaluationDate=$4 WHERE id=$5';
-        const values = [evaluation.UserID, evaluation.MovieID, evaluation.Rating, evaluation.EvaluationDate, id];
-        return await conn.query(sql, values);
+    async save(evaluation) {
+        const client = await pool.connect();
+        const sql = 'INSERT INTO Evaluate(userid, movieid, rating, evaluationdate) VALUES ($1,$2,$3,$4);';
+        const values = [evaluation.userid, evaluation.movieid, evaluation.rating, evaluation.evaluationdate];
+        const result = await client.query(sql, values);
+        client.release();
+        return result;
+    }
+
+    async find(userid, movieid) {
+        const client = await pool.connect();
+        const sql = 'SELECT * FROM evaluate WHERE userid=$1 AND movieid=$2;';
+        const values = [userid, movieid];
+        const data = await client.query(sql, values);
+        client.release();
+        return data.rows;
+    }
+
+    async update(evaluation, newEvaluation) {
+        const client = await pool.connect();
+        const sql = 'UPDATE Evaluate SET userid=$1, movieid=$2, rating=$3, evaluationdate=$4 WHERE userid=$5 AND movieid=$6';
+        const values = [evaluation.userid, evaluation.movieid, newEvaluation.rating, newEvaluation.evaluationdate, evaluation.userid, evaluation.movieid];
+        const result = await client.query(sql, values);
+        client.release();
+        return result;
     }
 
     async remove(id) {
-        const conn = await client.conectar();
+        const client = await pool.connect();
         const sql = 'DELETE FROM Evaluate where id=$1;';
-        return await conn.query(sql, [id]);
+        const result = await client.query(sql, [id]);
+        client.release();
+        return result;
+    }
+
+    async averageRating(movieid) {
+        const client = await pool.connect();
+        const sql = 'SELECT AVG(rating) AS avgrating FROM evaluate WHERE movieid=$1;';
+        const values = [movieid];
+        const data = await client.query(sql, values);
+        const avgrating = parseFloat(data.rows[0].avgrating).toFixed(2);
+        client.release();
+        return avgrating;
     }
 }
 
