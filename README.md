@@ -34,10 +34,10 @@ O banco de dados é composto por três tabelas: `Users`, `Movies` e `Evaluate`.
 
 A tabela `Users` armazena informações sobre os usuários. Ela tem as seguintes colunas:
 
-- `ID`: A chave primária da tabela.
-- `Name`: O nome do usuário.
-- `Username`: O nome de usuário que é único para cada usuário.
-- `Password`: A senha do usuário.
+ - `ID`: A chave primária da tabela.
+ - `Name`: O nome do usuário.
+ - `Username`: O nome de usuário que é único para cada usuário.
+ - `Password`: A senha do usuário.
 
 Você pode criar a tabela `Users` com o seguinte código SQL:
 
