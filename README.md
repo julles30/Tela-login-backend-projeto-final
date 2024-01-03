@@ -102,3 +102,22 @@ CREATE TABLE evaluate (
 	CONSTRAINT evaluate_userid_fkey FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE
 );
 ```
+
+### Tabela actors
+
+você pode criar uma tabela Actors com os seguintes campos: ID, Name, Age e MovieID. O campo MovieID seria uma chave estrangeira que referencia o ID na tabela Movies.
+
+``` sql
+CREATE TABLE Actors (
+    ID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Age INT CHECK (Age > 0),
+    MovieID INT,
+    CONSTRAINT actors_movieid_fkey FOREIGN KEY (MovieID) REFERENCES Movies(ID) ON UPDATE CASCADE
+);
+```
+
+ - ID é a chave primária da tabela.
+ - Name é o nome do ator, que não pode ser nulo.
+ - Age é a idade do ator, que deve ser maior que 0.
+ - MovieID é a chave estrangeira que referencia o ID na tabela Movies. Se o ID de um filme na tabela Movies for atualizado, o MovieID correspondente na tabela Actors também será atualizado automaticamente (graças à cláusula ON UPDATE CASCADE).
