@@ -7,6 +7,7 @@ const movieController = require('../controllers/movie.controller');
 const evaluateController = require('../controllers/evaluate.controller')
 const authController = require('../controllers/auth.controller');
 const evaluateModel = require('../models/evaluate.model');
+const actorController = require('../controllers/actor.contoller');
 
 routes.post("/auth", authController.login);
 
@@ -40,5 +41,12 @@ routes.post("/evaluate", auth, evaluateController.store);
 routes.get("/evaluate/:userid/:movieid", auth, evaluateController.show);
 routes.put("/evaluate/:userid/:movieid", auth, evaluateController.update);
 routes.delete("/evaluate/:userid/:movieid", auth, evaluateController.destroy);
+
+// Rotas de atores
+routes.get("/actors", actorController.index);
+routes.post("/actors", auth, actorController.store);
+routes.get("/actors/:id", auth, actorController.show);
+routes.put("/actors/:id", auth, actorController.update);
+routes.delete("/actors/:id", auth, actorController.destroy);
 
 module.exports = routes;
