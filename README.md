@@ -13,7 +13,8 @@ O backend deste projeto serve como uma API para gerenciamento de filmes, usuári
 1. Certifique-se de ter o Node.js instalado.
 2. Clone o repositório do backend.
 3. No diretório do projeto, execute o comando `npm i` para instalar as dependências.
-4. Utilize `npm run dev` para iniciar o servidor backend.
+4. Rode o comando `npm i react-rating-stars-component` para instalar a dependência que não vem no `npm i`.
+5. Utilize `npm run dev` para iniciar o servidor backend.
 
 ## Funcionalidades Principais
 
