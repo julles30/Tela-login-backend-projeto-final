@@ -50,7 +50,6 @@ routes.get("/actors/:id", auth, actorController.show);
 routes.put("/actors/:id", auth, actorController.update);
 routes.delete("/actors/:id", auth, actorController.destroy);
 
-// Rotas de comentários
 // Primeira rota para pegar todos os autores por movieid
 routes.get("/actors/movie/:movieId", auth, actorController.indexByMovie);
 
