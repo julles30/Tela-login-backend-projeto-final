@@ -8,6 +8,7 @@ const evaluateController = require('../controllers/evaluate.controller')
 const authController = require('../controllers/auth.controller');
 const evaluateModel = require('../models/evaluate.model');
 const actorController = require('../controllers/actor.contoller');
+const commentController = require('../controllers/comment.controller');
 
 routes.post("/auth", authController.login);
 
@@ -48,5 +49,9 @@ routes.post("/actors", auth, actorController.store);
 routes.get("/actors/:id", auth, actorController.show);
 routes.put("/actors/:id", auth, actorController.update);
 routes.delete("/actors/:id", auth, actorController.destroy);
+
+// Rotas de comentários
+// Primeira rota para pegar todos os autores por movieid
+routes.get("/actors/movie/:movieId", auth, actorController.indexByMovie);
 
 module.exports = routes;
