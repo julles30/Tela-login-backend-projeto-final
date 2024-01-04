@@ -10,8 +10,8 @@ class ActorModel {
 
     async save(actor) {
         const client = await pool.connect();
-        const sql = 'INSERT INTO Actors(name, birthdate, nationality) VALUES ($1,$2,$3);';
-        const values = [actor.name, actor.birthdate, actor.nationality];
+        const sql = 'INSERT INTO Actors(name, age, movieid) VALUES ($1,$2,$3);';
+        const values = [actor.Name, actor.Age, actor.MovieID];
         const result = await client.query(sql, values);
         client.release();
         return result;
@@ -28,8 +28,8 @@ class ActorModel {
 
     async update(id, newActor) {
         const client = await pool.connect();
-        const sql = 'UPDATE Actors SET name=$1, birthdate=$2, nationality=$3 WHERE id=$4';
-        const values = [newActor.name, newActor.birthdate, newActor.nationality, id];
+        const sql = 'UPDATE Actors SET name=$1, age=$2, movieid=$3 WHERE id=$4';
+        const values = [newActor.Name, newActor.Age, newActor.MovieID, id];
         const result = await client.query(sql, values);
         client.release();
         return result;
@@ -42,6 +42,15 @@ class ActorModel {
         client.release();
         return result;
     }
+
+    async findByMovie(movieId) {
+        const client = await pool.connect();
+        const sql = 'SELECT * FROM Actors WHERE movieId=$1;';
+        const values = [movieId];
+        const data = await client.query(sql, values);
+        client.release();
+        return data.rows;
+    }    
 }
 
 module.exports = new ActorModel();

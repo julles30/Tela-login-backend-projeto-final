@@ -41,4 +41,13 @@ async function destroy(req, res) {
     res.json({ message: "Actor deleted" });
 }
 
-module.exports = { index, store, show, update, destroy };
+async function indexByMovie(req, res) {
+    const movieId = req.params.movieId;
+    const actors = await ActorModel.findByMovie(movieId);
+    if (!actors) {
+        return res.status(404).json({ message: "Actors not found for this movie" });
+    }
+    res.json(actors);
+}
+
+module.exports = { index, store, show, update, destroy, indexByMovie };
